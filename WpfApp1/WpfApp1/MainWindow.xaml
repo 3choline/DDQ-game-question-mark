@@ -3,30 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Dungeon Dice Quest" Height="600" Width="800">
     <Grid>
-        <!-- Header -->
-        <TextBlock Text="Dungeon Dice Quest" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" />
+        <!-- Player Selection UI -->
+        <Grid Name="PlayerSelectionGrid" Visibility="Visible">
+            <TextBlock Text="Select Your Players" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" />
 
-        <!-- Character Selection -->
-        <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <TextBlock Text="Select Character:" FontWeight="Bold" Margin="0,10,0,5"/>
-            <ComboBox x:Name="CharacterSelection" Width="200" Margin="0,0,0,10">
-                <ComboBoxItem Content="Knight"/>
-                <ComboBoxItem Content="Wizard"/>
-                <ComboBoxItem Content="Thief"/>
-            </ComboBox>
-        </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <CheckBox x:Name="KnightCheckbox" Content="Knight" FontSize="16" Margin="5" />
+                <CheckBox x:Name="WizardCheckbox" Content="Wizard" FontSize="16" Margin="5" />
+                <CheckBox x:Name="ThiefCheckbox" Content="Thief" FontSize="16" Margin="5" />
+                <CheckBox x:Name="ClericCheckbox" Content="Cleric" FontSize="16" Margin="5" />
+            </StackPanel>
 
-        <!-- Dice Roll -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Roll Dice" Width="100" Click="RollDice_Click"/>
-            <TextBlock x:Name="DiceResult" Text="Result: " Margin="10,0,0,0" VerticalAlignment="Center"/>
-        </StackPanel>
+            <Button Content="Start Game" FontSize="16" Width="120" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" 
+                    Click="StartGameButton_Click" />
+        </Grid>
 
-        <!-- Health Bar -->
-        <ProgressBar x:Name="HealthBar" Minimum="0" Maximum="100" Value="100" Height="20" Width="300" VerticalAlignment="Bottom" Margin="0,0,0,30"/>
-        <TextBlock Text="Health" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50"/>
+        <!-- Main Game UI -->
+        <Grid Name="GameUIGrid" Visibility="Collapsed">
+            <!-- Health Display -->
+            <TextBlock Name="HealthTextBlock" Text="Health Pool: 100" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
 
-        <!-- Log Panel -->
-        <ListBox x:Name="GameLog" Margin="10" VerticalAlignment="Bottom" Height="200"/>
+            <!-- Current Player Display -->
+            <TextBlock Name="PlayerTextBlock" Text="Current Player: Player 1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0"/>
+
+            <!-- Current Room Display -->
+            <TextBlock Name="RoomTextBlock" Text="Room: 1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,70,0,0"/>
+
+            <!-- Dice Result Display -->
+            <TextBlock Name="DiceResultTextBlock" Text="You rolled: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,0,0"/>
+
+            <!-- Roll Dice Button -->
+            <Button Name="RollDiceButton" Content="Roll Dice" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,140,0,0" 
+                    Click="RollDiceButton_Click"/>
+
+            <!-- Placeholder for additional UI -->
+            <ListBox Name="PlayerActionsList" Width="300" Height="200" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <!-- Room Image Placeholder -->
+            <Image Name="RoomImage" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,10,0,0"/>
+        </Grid>
     </Grid>
 </Window>
